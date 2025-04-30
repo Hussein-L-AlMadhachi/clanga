@@ -34,3 +34,6 @@ Thumbs.db
 
 # Optional npm cache directory
 .npm/
+
+# compiled CSS
+*.style.css

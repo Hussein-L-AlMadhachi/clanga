@@ -15,6 +15,6 @@ export function clanga() {
             stdio: 'inherit'
         });
     }
-    
+
     console.log();
 }

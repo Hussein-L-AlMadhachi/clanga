@@ -25,3 +25,6 @@ tests/
 *.iml
 
 npm-debug.log*
+
+# compiled CSS
+*.style.css

@@ -14,4 +14,5 @@ for ( let file of entries ) {
         stdio: 'inherit'
     });
 }
+
 console.log();

@@ -1,0 +1,100 @@
+import fs from "node:fs";
+
+
+
+export let global_styles = {
+    all : {},
+    xxxs : {},
+    xxs : {},
+    xs : {} ,
+    s : {} ,
+    m : {} ,
+    l : {} ,
+    xl : {} ,
+    xxl : {},
+    xxxl : {},
+    xxxxxl : {}
+}
+
+
+
+
+process.on('beforeExit', (code) => {
+
+    let raw_style = "";
+
+    for( const screen_size in global_styles ) {
+
+        let media_queries = media_queries_lookup[ screen_size ];
+
+        // don't generate media queries if there are no classes in there
+        if ( Object.keys(global_styles[ screen_size ]).length === 0 ) {
+            continue;
+        }
+
+        raw_style += `\n${ media_queries } {  /*${screen_size}*/  \n`;
+        
+        for( const class_name in global_styles[screen_size] ) {
+
+            raw_style += `\n    .${class_name} {\n`;
+
+            for( const property in global_styles[screen_size][class_name] ) {
+                
+                let property_style = global_styles[screen_size][class_name][property];
+                
+                if( property_style ) {
+                    raw_style += `        ${property}: ${property_style};\n`;
+                }
+            }
+
+
+            raw_style += `    }\n\n`;
+        }
+
+        raw_style += `}\n\n\n`;
+    }
+    fs.writeFileSync( process.argv[1].slice( 0, process.argv[1].length - 3)+".css" , raw_style, 'utf8' );
+});
+
+
+
+
+export let media_queries_lookup = {
+    all : "@media screen and (min-width: 1px)", 
+    xxxs : "@media screen and (min-width: 156px)",
+    xxs : "@media screen and (min-width: 270px)", // I believe the absolute smallest smartphone
+    xs : "@media screen and (min-width: 319px)", // almost the smallest smartphones
+    s : "@media screen and (min-width: 568px)",
+    m : "@media screen and (min-width: 768px)",
+    l : "@media screen and (min-width: 1024px)",
+    xl : "@media screen and (min-width: 1280px)",
+    xxl : "@media screen and (min-width: 1920px)",
+    xxxl : "@media screen and (min-width: 2560px)",
+    xxxxl : "@media screen and (min-width: 3840px)",
+    xxxxxl : "@media screen and (min-width: 6016px)",
+}
+
+
+
+
+export default function style( name , responsive_styles ) {
+    
+    for( const screen_size in responsive_styles ) {
+
+        if( ! global_styles.hasOwnProperty( screen_size ) ) {
+            throw Error( `screen size "${global_styles}" is invalid.` )
+        }
+
+        let class_style = {};
+        class_style[ name ] = responsive_styles[ screen_size ].styles
+        global_styles[ screen_size ] = class_style;
+
+        if ( responsive_styles[ screen_size ].children_styles ) {
+            class_style = {};
+            class_style[ `${name} > * ` ] = responsive_styles[ screen_size ].styles
+            global_styles[ screen_size ] = class_style;
+        }
+
+    }
+
+}
