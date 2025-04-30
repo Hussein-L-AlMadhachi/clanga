@@ -25,12 +25,12 @@ npm install clanga-compose
 * webpack plugin/loader
 
 ## Setup on Vite.js
-in `vite.config.js` call `clang()` from `clanga-compose/`
+in `vite.config.js` call `clang()` from `clanga-compose/plugins/clanga-vite.js`
 
 ```javascript
 
 import { defineConfig } from 'vite'
-import clanga from 'clanga-compose/plugins/clanga-vite'
+import clanga from 'clanga-compose/plugins/clanga-vite.js'
 
 // https://vite.dev/config/
 export default defineConfig({
