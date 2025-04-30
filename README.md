@@ -30,11 +30,11 @@ in `vite.config.js` call `clang()` from `clanga-compose/`
 ```javascript
 
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import clanga from 'clanga-compose/plugins/clanga-vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [console.log("hassoni is the absolute best") , react()],
+  plugins: [ ... , clanga() ],
 })
 
 
@@ -46,23 +46,63 @@ export default defineConfig({
 write all your styles in files with file extension `.style.js` with the following content:
 
 ``` javascript
-Style( "my_class" , {
-    xs : Flex.use({ gap:"20px" , mode:"row" })
-        .visual({ w:"100%" , h:"50px" })
-        .self({ xcenter:true }),
+import { Style , Flex , This , hsl } from "../clanga.js"
 
-    l : Flex.use({ gap:"20px" , mode:"row" })
-        .visual({ w:"300px" , h:"50px" })
-        .self({ xcenter:true }),
+
+
+// themes (optional but very useful)
+const
+    primary = hsl( 163, 54, 25 ),
+    secondary = hsl( 216, 55, 68 ),
+    accent = hsl( 239, 55, 41 ),
+    background = hsl( 163, 54, 95 ),
+    text = hsl( 160, 52, 9 )
+;
+
+
+
+Style( "my-list-class" , {
+    all : Flex.use({ gap:"20px" , mode:"row" , wrap:true })
+        .justify( { col: "space-evenly" ,  row:"center" } )
+        .align({ wstretch:true , right:"20px" , left:"20px" })
+        .visual({ h:"200px" , fg:text , bg:background }),
+
+    s :  This.visual({ w:"70%" }),
+
+    l : This.visual({ w:"768px" }),
 })
 
+
 /*
-Outputs:
-.button {
-    background-color: blue;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
+ Outputs:
+
+@media screen and (min-width: 1px) {  
+    .my-list-class {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        align-items: space-evenly;
+        justify-content: center;
+        flex-wrap: wrap;
+        position: absolute;
+        left: 20px;
+        width: calc( 100% - 20px - 20px );
+        color: hsl(160,52,9,1);
+        background-color: hsl(163,54,95,1);
+        height: 200px;
+    }
+}
+
+@media screen and (min-width: 568px) {  
+    .my-list-class {
+        width: 768px;
+    }
+}
+
+@media screen and (min-width: 1024px) {  
+    .my-list-class {
+        width: 768px;
+    }
 }
 */
 ```
