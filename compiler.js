@@ -4,6 +4,7 @@ import fs from "node:fs";
 
 export let global_styles = {
     all : {},
+    xxxxs : {},
     xxxs : {},
     xxs : {},
     xs : {} ,
@@ -61,9 +62,10 @@ process.on('beforeExit', (code) => {
 
 export let media_queries_lookup = {
     all : "@media screen and (min-width: 1px)", 
+    xxxxs : "@media screen and (min-width: 90px)", // smart watches
     xxxs : "@media screen and (min-width: 156px)",
-    xxs : "@media screen and (min-width: 270px)", // I believe the absolute smallest smartphone
-    xs : "@media screen and (min-width: 319px)", // almost the smallest smartphones
+    xxs : "@media screen and (min-width: 270px)", // almost the smallest smartphone
+    xs : "@media screen and (min-width: 319px)",
     s : "@media screen and (min-width: 568px)",
     m : "@media screen and (min-width: 768px)",
     l : "@media screen and (min-width: 1024px)",
@@ -79,22 +81,23 @@ export let media_queries_lookup = {
 
 export default function style( name , responsive_styles ) {
     
-    for( const screen_size in responsive_styles ) {
-
+    for( let screen_size in responsive_styles ) {
+        
         if( ! global_styles.hasOwnProperty( screen_size ) ) {
             throw Error( `screen size "${global_styles}" is invalid.` )
         }
 
-        let class_style = {};
-        class_style[ name ] = responsive_styles[ screen_size ].styles
-        global_styles[ screen_size ] = class_style;
+        global_styles[ screen_size ][ name ] = responsive_styles[ screen_size ].styles;
 
-        if ( responsive_styles[ screen_size ].children_styles ) {
-            class_style = {};
-            class_style[ `${name} > * ` ] = responsive_styles[ screen_size ].styles
-            global_styles[ screen_size ] = class_style;
+
+        // add subclasses (children classes)
+        for ( const subclass_name in responsive_styles[ screen_size ].children_styles ) {
+            
+            global_styles[ screen_size ][ `${name} > ${subclass_name}` ] = 
+                    responsive_styles[ screen_size ].children_styles[ subclass_name ];
+        
         }
-
+        
     }
 
 }
