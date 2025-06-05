@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import fg from 'fast-glob';
 import { spawn } from 'child_process';
 
@@ -15,4 +17,4 @@ for ( let file of entries ) {
     });
 }
 
-console.log();
+console.log("\n >>>  Done!!");

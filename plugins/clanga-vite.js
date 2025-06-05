@@ -16,5 +16,5 @@ export function clanga() {
         });
     }
 
-    console.log();
+    console.log("\nDone!!");
 }

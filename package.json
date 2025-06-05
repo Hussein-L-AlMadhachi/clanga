@@ -1,31 +1,34 @@
 {
-  "name": "clang-compose",
-  "version": "0.0.1",
-  "description": "A libaray to make CSS almost absolete",
-  "main": "clanga.js",
-  "type": "module",
-  "scripts": {
-    "build":"node cli.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "css",
-    "style",
-    "clanga",
-    "clanga-compose",
-    "compose",
-    "vite",
-    "react",
-    "vue",
-    "svelte",
-    "solid",
-    "alpine",
-    "javascript",
-    "html"
-  ],
-  "author": "Hussein Al-Madhachi",
-  "license": "MIT",
-  "dependencies": {
-    "fast-glob": "^3.3.3"
-  }
+    "name": "clang-compose",
+    "version": "0.0.1",
+    "description": "A libaray built to r",
+    "main": "cli.js",
+    "type": "module",
+    "scripts": {
+        "build":"node cli.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "css",
+        "style",
+        "clanga",
+        "clanga-compose",
+        "compose",
+        "vite",
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "alpine",
+        "javascript",
+        "html"
+    ],
+    "bin": {
+        "clanga-build":"./cli.js"
+    },
+    "author": "Hussein Al-Madhachi",
+    "license": "MIT",
+    "dependencies": {
+        "fast-glob": "^3.3.3"
+    }
 }

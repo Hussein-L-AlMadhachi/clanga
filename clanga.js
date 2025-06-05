@@ -196,7 +196,7 @@ export class Clanga {
 
 
 
-export class FlexOnj extends Clanga {
+export class FlexObj extends Clanga {
 
 
     constructor() {
@@ -307,7 +307,7 @@ export function This() {
 
 
 export function Flex() {
-    return new FlexOnj;
+    return new FlexObj;
 }
 
 
