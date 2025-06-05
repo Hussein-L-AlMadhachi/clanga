@@ -21,6 +21,10 @@
         "solid",
         "alpine",
         "javascript",
+        "front-end",
+        "frameworks",
+        "cli",
+        "mobile",
         "html"
     ],
     "bin": {
