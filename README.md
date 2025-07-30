@@ -1,6 +1,8 @@
+> Documentation are in Beta
+
 # Clang-Compose
 
-Clang-Compose is a JavaScript-to-CSS generator rather than being CSS-in-JS. it is designed to simplify the process of creating dynamic and reusable CSS styles directly from your JavaScript code.
+Clang-Compose is a JavaScript-to-CSS generator — not a CSS-in-JS library.. it is designed to simplify the process of creating dynamic and reusable CSS styles directly from your JavaScript code.
 
 you no longer need to write CSS
 
@@ -9,8 +11,8 @@ Clanga also comes with its own styling rules (JS functions you call to generate 
 
 ## Features
 * No more raw CSS
-* Prevents you from writing styles that contradicts each other as much possible
-* Generate resposnive styles programmatically using JavaScript.
+* Prevents you from writing styles that contradict each other as much as possible
+* Generate responsive styles programmatically using JavaScript.
 * Improve reusability and maintainability of your styles.
 * Simplify the management of dynamic styles.
 * Effortlessly customizable and extendable.
@@ -25,7 +27,7 @@ npm install clanga-compose
 * webpack plugin/loader
 
 ## Setup on Vite.js
-in `vite.config.js` call `clang()` from `clanga-compose/plugins/clanga-vite.js`
+in `vite.config.js` write this:
 
 ```javascript
 
@@ -43,7 +45,7 @@ export default defineConfig({
 ## 🧭 Quickstart
 
 ```js
-import { Style, Flex, This, hsl } from "clanga";
+import { Style, Flex, This, hsl } from "clanga-compose";
 
 // Define theme colors
 const primary = hsl(163, 54, 25);
@@ -168,6 +170,8 @@ Style("my-style-name", {
 ## 🧪 Example
 
 ```js
+
+import { hsl , Style , Flex , Div } from "clanga-compose";
 
 // themes (optional but very useful)
 const
