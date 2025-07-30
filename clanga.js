@@ -300,6 +300,8 @@ export class FlexObj extends Clanga {
             "flex-grow" : grow?grow:"0",
             "flex-shrink" : shrink?shrink:"0",
             "flex-basis" : basis?basis:"auto",
+            "order" : order?order:"0",
+            "align-self" : align?align:"auto",
         } ) );
 
         return this;
@@ -311,6 +313,8 @@ export class FlexObj extends Clanga {
             "flex-grow" : grow?grow:"0",
             "flex-shrink" : shrink?shrink:"0",
             "flex-basis" : basis?basis:"auto",
+            "order" : order?order:"0",
+            "align-self" : align?align:"auto",
         } ) );
 
         return this;
