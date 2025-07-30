@@ -14,7 +14,6 @@ const
 
 
 
-
 Style( "my-list-2" , {
     all : Flex().use({ gap:"20px" , mode:"row" , wrap:true })
         .visual({ h:"200px" , fg:text , bg:background })
@@ -31,13 +30,12 @@ Style( "my-list-class" , {
         .justify( { col: "space-evenly" ,  row:"center" } )
         .align({ wstretch:true , right:"20px" , left:"20px" })
         .visual({ h:"200px" , fg:text , bg:background })
-        .itemClass( "my-1" , {grow:1 , shrink:1 } ),
+        .itemClass( "my-child-flex-class" , {grow:1 , shrink:1 } ),
 
     s :  This().visual({ w:"70%" }),
 
     l : This().visual({ w:"768px" }),
 })
-
 
 
 
@@ -49,6 +47,5 @@ Style( "my-div" , {
 
     xl : This().visual({ h:"768px" }),
 })
-
 
 

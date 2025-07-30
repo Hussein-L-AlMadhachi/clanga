@@ -22,7 +22,6 @@ export class Clanga {
         relative=false, xcenter=false , ycenter=false , wstretch=false , hstretch=false 
     }) {
         
-        
         if ( ! this.styles ) {
             this.styles = {};
         }
@@ -107,7 +106,7 @@ export class Clanga {
     }
 
 
-    visual( { fg , bg , border , radius , w , h } ) {
+    visual( { fg , bg , border , radius , w , h , pad_top , pad_bottom , pad_right , pad_left , pad } ) {
         
         if ( ! this.styles ) {
             this.styles = {};
@@ -134,7 +133,29 @@ export class Clanga {
 
             this.apply_style( "height" , h );
         }
+
+
+        if ( pad ) {
+            this.apply_style( "padding" , pad );
+        }
+
+        if ( pad_top ) {
+            this.apply_style( "padding-top" , pad_top );
+        }
         
+
+        if ( pad_bottom ) {
+            this.apply_style( "padding-bottom" , pad_bottom );
+        }
+
+        if ( pad_right ) {
+            this.apply_style( "padding-right" , pad_right );
+        }
+
+        if ( pad_left ) {
+            this.apply_style( "padding-left" , pad_left );
+        }
+
         return this;
     }
 
@@ -299,7 +320,7 @@ export class FlexObj extends Clanga {
 
 
 
-export function This() {
+export function Div() {
     return new Clanga;
 }
 

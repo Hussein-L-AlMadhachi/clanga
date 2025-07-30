@@ -1,6 +1,6 @@
 {
-    "name": "clang-compose",
-    "version": "0.0.1",
+    "name": "clanga-compose",
+    "version": "0.0.4",
     "description": "A libaray built to r",
     "main": "cli.js",
     "type": "module",
@@ -28,7 +28,7 @@
         "html"
     ],
     "bin": {
-        "clanga-build":"./cli.js"
+        "clanga-compose":"./cli.js"
     },
     "author": "Hussein Al-Madhachi",
     "license": "MIT",

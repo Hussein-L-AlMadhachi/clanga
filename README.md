@@ -1,10 +1,10 @@
 # Clang-Compose
 
-Clang-Compose is a JavaScript-to-CSS generator designed to simplify the process of creating dynamic and reusable CSS styles directly from your JavaScript code.
+Clang-Compose is a JavaScript-to-CSS generator rather than being CSS-in-JS. it is designed to simplify the process of creating dynamic and reusable CSS styles directly from your JavaScript code.
 
 you no longer need to write CSS
 
-Clanga also comes with its own styling rules (JS functions you call to generate your optimised CSS) that provides a less painful experience compared to CSS or any technologies directly rely on it (e.g. Bootstrap and Tailwind)
+Clanga also comes with its own styling rules (JS functions you call to generate your optimised raw CSS) that provides a less painful experience compared to CSS or any technologies directly rely on it (e.g. Bootstrap and Tailwind)
 
 
 ## Features
@@ -13,7 +13,7 @@ Clanga also comes with its own styling rules (JS functions you call to generate 
 * Generate resposnive styles programmatically using JavaScript.
 * Improve reusability and maintainability of your styles.
 * Simplify the management of dynamic styles.
-* Effortlessly customizable and extendable
+* Effortlessly customizable and extendable.
 
 ``` bash
 npm install clanga-compose
@@ -40,15 +40,134 @@ export default defineConfig({
 
 ```
 
+## 🧭 Quickstart
 
-## Usage
+```js
+import { Style, Flex, This, hsl } from "clanga";
 
-write all your styles in files with file extension `.style.js` with the following content:
+// Define theme colors
+const primary = hsl(163, 54, 25);
+const background = hsl(163, 54, 95);
+const text = hsl(160, 52, 9);
 
-``` javascript
-import { Style , Flex , This , hsl } from "../clanga.js"
+// Apply styles
+Style("my-div", {
+  all: Div()
+    .align({ wstretch: true, left: "20px", right: "20px" })
+    .visual({ h: "200px", fg: text, bg: background }),
 
+  xs: Div().visual({ h: "70%" }),
+  xl: Div().visual({ h: "768px" }),
+});
+```
 
+then run
+```bash
+npx clanga-compose
+```
+
+---
+
+## ✨ API Overview
+
+### 🧱 `Div()`
+```js
+Div().align({ ... }).visual({ ... }).extra({ ... });
+```
+
+#### `.align({ ... })` options:
+- `top`, `bottom`, `left`, `right`: string (px, %, etc.)
+- `z`: z-index
+- `fixed`, `relative`, `sticky`: booleans for position
+- `xcenter`, `ycenter`: booleans for centering
+- `wstretch`, `hstretch`: booleans for stretching
+
+#### `.visual({ ... })` options:
+- `fg`: color
+- `bg`: background color
+- `border`, `radius`: border styles
+- `w`, `h`: width and height (not allowed if `wstretch`/`hstretch` is used)
+- `pad` : padding
+- `pad_right`: right padding
+- `pad_left`: left padding
+- `pad_top`: top padding
+- `pad_bottom`: bottom padding
+
+#### `.extra({ styles })`
+Set arbitrary CSS styles using a dictionary.
+
+---
+
+### 🤸 `Flex()`
+
+```js
+Flex().use({ mode: "row", gap: "10px", wrap: true })
+  .justify({ row: "center", col: "space-evenly" });
+```
+
+#### `.use({ ... })`
+main flex box options
+- `mode`: `"row"` or `"col"`
+- `gap`: CSS gap
+- `wrap`: boolean
+- `reverse`: reverse direction (boolean)
+- `reverse_wrap`: reverse wrapping direction (boolean)
+
+#### `.justify({ row, col })`
+Aligns content depending on mode
+- `row`: `"start"` or `"center"` or `"end"` or `"space-between"` or `"space-around"` or `"space-evenly"`
+- `col`: `"start"` or `"center"` or `"end"` or `"space-between"` or `"space-around"` or `"space-evenly"`
+
+#### `.itemClass(selector, { grow, shrink, basis })`
+Defines flex item styles for children with a class.
+
+#### `.item(nthChild, { grow, shrink, basis })`
+Same as above but for a specific `:nth-child(...)`
+
+---
+
+## 🎨 Colors
+
+Helper functions:
+```js
+hsl(h, s, l, a?)   // returns `hsl(...)`
+rgb(r, g, b, a?)   // returns `rgba(...)`
+
+// a is optional for opacity
+```
+
+---
+
+## 🧩 Style()
+
+```js
+Style("my-style-name", {
+  all: ...Clanga/Flex instance...,
+  xs: ...,
+  s: ...,
+  m: ...,
+  l: ...,
+  xl: ...
+});
+```
+
+- Define base and responsive styles.
+- Internally handled by your `compiler.js` (not shown here).
+
+---
+
+## 🧠 Tips
+
+- **Avoid conflicts**: `wstretch` can’t be used with `w`, etc.
+- Use `Div()` and `Flex()` to construct components.
+- You can call `.child(n, style)` or `.substyle(name, style)` for nested elements.
+- Responsive breakpoints are manual keys: `xs`, `s`, `m`, `l`, `xl`
+
+---
+
+## 🧪 Example
+
+```js
 
 // themes (optional but very useful)
 const
@@ -60,58 +179,16 @@ const
 ;
 
 
+Style("my-list", {
+  all: Flex().use({ mode: "row", wrap: true, gap: "20px" })
+    .visual({ h: "200px", fg: text, bg: background })
+    .itemClass("my-child", { grow: 1 }),
 
-Style( "my-list-class" , {
-    all : Flex.use({ gap:"20px" , mode:"row" , wrap:true })
-        .justify( { col: "space-evenly" ,  row:"center" } )
-        .align({ wstretch:true , right:"20px" , left:"20px" })
-        .visual({ h:"200px" , fg:text , bg:background }),
-
-    s :  This.visual({ w:"70%" }),
-
-    l : This.visual({ w:"768px" }),
-})
-
-
-/*
- Outputs:
-
-@media screen and (min-width: 1px) {  
-    .my-list-class {
-        display: flex;
-        flex-direction: row;
-        gap: 20px;
-        align-items: space-evenly;
-        justify-content: center;
-        flex-wrap: wrap;
-        position: absolute;
-        left: 20px;
-        width: calc( 100% - 20px - 20px );
-        color: hsl(160,52,9,1);
-        background-color: hsl(163,54,95,1);
-        height: 200px;
-    }
-}
-
-@media screen and (min-width: 568px) {  
-    .my-list-class {
-        width: 768px;
-    }
-}
-
-@media screen and (min-width: 1024px) {  
-    .my-list-class {
-        width: 768px;
-    }
-}
-*/
+  s: Div().visual({ w: "70%" }),
+});
 ```
 
-Run the example with:
-
-``` bash
-node /test/example.js
-```
+---
 
 ## Contributing
 
