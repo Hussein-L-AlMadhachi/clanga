@@ -1,8 +1,27 @@
-import style from "./compiler.js";
+import {style, componenet } from "./compiler.js";
 
 
 
-export const Style = style
+export function Style( selector , responsive_styles ) {
+    return style( selector , responsive_styles , false );
+}
+
+
+
+// simple yet very very useful to extend styles (this is designed to overwrite exiting styles)
+export function Edit( style_component , responsive_styles ) {
+    return style( style_component.selector , responsive_styles , true );
+}
+
+
+
+export function Sheet( responsive_styles ) {
+    const style_componenet = new componenet();
+    style_componenet.extend( responsive_styles );
+
+    return style_componenet;
+}
+
 
 
 
@@ -36,7 +55,7 @@ export class Clanga {
                 throw new Error( "you can either use \"fixed\" or \"relative\" or \"sticky\" but never together (if none specified it will default to absolute)" )
             }
             
-            this.apply_style( "position" , "fixed" ); 
+            this.__apply_style( "position" , "fixed" ); 
             is_positioned = true
         }
         if ( relative ) {
@@ -44,17 +63,17 @@ export class Clanga {
                 throw new Error( "you can either use \"fixed\" or \"relative\" or \"sticky\" but never together (if left blank it will default to absolute" )
             }
     
-            this.apply_style( "position" , "relative" ); 
+            this.__apply_style( "position" , "relative" ); 
         }
         if ( sticky ) {
             if( is_positioned ) {
                 throw new Error( "you can either use \"fixed\" or \"relative\" or \"sticky\" but never together (if left blank it will default to absolute" )
             }
             
-            this.apply_style( "position" , "sticky" ); 
+            this.__apply_style( "position" , "sticky" ); 
         } 
         if( ! is_positioned ) {
-            this.apply_style( "position" , "absolute" ); 
+            this.__apply_style( "position" , "absolute" ); 
         }
 
         // preventing conflicts between center properties and absolute positioning options
@@ -77,28 +96,28 @@ export class Clanga {
             right = "50%"
         }
         if ( is_center_used ) {
-            this.apply_style( "transform" , `translate( ${xcenter?"50%":"0"} , ${ycenter?"50%":"0"} )` );
+            this.__apply_style( "transform" , `translate( ${xcenter?"50%":"0"} , ${ycenter?"50%":"0"} )` );
         }
 
-        this.apply_style( "z-index" , z );
+        this.__apply_style( "z-index" , z );
 
         // add positioning styles
         if ( hstretch ) {
             this.is_y_stretched = true
-            this.apply_style( "top" , top?top:"0px" );
-            this.apply_style( "height" , `calc( 100% - ${top?top:"0px"} - ${bottom?bottom:"0px"} )` );
+            this.__apply_style( "top" , top?top:"0px" );
+            this.__apply_style( "height" , `calc( 100% - ${top?top:"0px"} - ${bottom?bottom:"0px"} )` );
         } else {
-            this.apply_style( "top" , top ); 
-            this.apply_style( "bottom" , bottom ); 
+            this.__apply_style( "top" , top ); 
+            this.__apply_style( "bottom" , bottom ); 
         }
 
         if ( wstretch ) {
             this.is_x_stretched = true
-            this.apply_style( "left" , left?left:"0px" );
-            this.apply_style( "width" , `calc( 100% - ${left?left:"0px"} - ${right?right:"0px"} )` );
+            this.__apply_style( "left" , left?left:"0px" );
+            this.__apply_style( "width" , `calc( 100% - ${left?left:"0px"} - ${right?right:"0px"} )` );
         } else {
-            this.apply_style( "left" , left ); 
-            this.apply_style( "right" , right ); 
+            this.__apply_style( "left" , left ); 
+            this.__apply_style( "right" , right ); 
         }
 
         return this;
@@ -106,16 +125,33 @@ export class Clanga {
     }
 
 
-    visual( { fg , bg , border , radius , w , h , pad_top , pad_bottom , pad_right , pad_left , pad } ) {
+    pad({left , top , right , bottom , all}) {
+
+        this.__apply_style( "padding" , all );
+        this.__apply_style( "padding-top" , top );
+        this.__apply_style( "padding-bottom" , bottom );
+        this.__apply_style( "padding-right" , right );
+        this.__apply_style( "padding-left" , left );
+        return this;
+    }
+
+
+    color( {fg , bg} ) {
+        this.__apply_style( "color" , fg );
+        this.__apply_style( "background-color" ,  bg );
+
+        return this;
+    }
+
+
+    shape( { border , radius , w , h } ) {
         
         if ( ! this.styles ) {
             this.styles = {};
         }
         
-        this.apply_style( "color" , fg );
-        this.apply_style( "background-color" ,  bg );
-        this.apply_style( "border" , border );
-        this.apply_style( "border-radius" , radius );
+        this.__apply_style( "border" , border );
+        this.__apply_style( "border-radius" , radius );
 
         // because .align sets "width" and "height" you gotta prevent this from overwriting it 
         if ( w ) {
@@ -123,96 +159,107 @@ export class Clanga {
                 throw new Error( "you cannot use \"wstretch\" and \"w\" together" )
             }
 
-            this.apply_style( "width" , w );
-        }
-
+            this.__apply_style( "width" , w );
+        }    
+        
         if ( h ) {
             if (this.is_y_stretched ) {
                 throw new Error( "you cannot use \"hstretch\" and \"h\" together" )
-            }
-
-            this.apply_style( "height" , h );
-        }
-
-
-        if ( pad ) {
-            this.apply_style( "padding" , pad );
-        }
-
-        if ( pad_top ) {
-            this.apply_style( "padding-top" , pad_top );
-        }
+            }    
+            
+            this.__apply_style( "height" , h );
+        }    
         
+        return this;
+    }    
+    
 
-        if ( pad_bottom ) {
-            this.apply_style( "padding-bottom" , pad_bottom );
-        }
+    font({
+        family , line_height , weight , size , variant_caps , stretch , word_spacing ,
+        letter_spacing , variant , indent , word_break , hyphens , overflow , break_word ,
+        align , align_last , transform , decoration , decoration_color , decoration_style ,
+        direction , writing_mode , white_space , 
+    }) {
 
-        if ( pad_right ) {
-            this.apply_style( "padding-right" , pad_right );
-        }
+        this.__apply_style( "font-family" , family );
+        this.__apply_style( "font-size" , size );
+        this.__apply_style( "font-weight" , weight );
+        this.__apply_style( "line-height" , line_height );
+        this.__apply_style( "font-stretch" , stretch );
+        this.__apply_style( "font-variant-caps" , variant_caps );
+        this.__apply_style( "font-variant" , variant );
 
-        if ( pad_left ) {
-            this.apply_style( "padding-left" , pad_left );
-        }
+        this.__apply_style( "word-spacing" , word_spacing );
+        this.__apply_style( "letter-spacing" , letter_spacing );
+        this.__apply_style( "text-indent" , indent );
+
+        this.__apply_style( "text-align" , align );
+        this.__apply_style( "text-align-last" , align_last );
+        this.__apply_style( "text-transform" , transform );
+
+        this.__apply_style( "text-decoration" , decoration );
+        this.__apply_style( "text-decoration-color" , decoration_color );
+        this.__apply_style( "text-decoration-style" , decoration_style );
+
+        this.__apply_style( "direction" , direction );
+        this.__apply_style( "writing-mode" , writing_mode );
+
+        this.__apply_style( "word-break" , word_break );
+        this.__apply_style( "white-space" , white_space );
+        this.__apply_style("hyphens" , hyphens );
+
+        this.__apply_style( "overflow-wrap" , break_word?"":"break-word" );
+        this.__apply_style( "text-overflow" , overflow );
 
         return this;
     }
 
-
-    apply_style( property , style , empty=undefined ) {
-
-        if( !style ) {
-            style = empty;
-        }
-
-        if ( ! this.styles ) {
-            this.styles = {};
-        }
-        this.styles[ property ] = style;
-    }
 
     extra( extra_styles ) {
         if ( ! this.styles ) {
             this.styles = {};
-        }
-
+        }    
+        
         for( let property in extra_styles ) {
             this.styles[ property ] = extra_styles[ property ];
-        }
+        }    
         return this;
-    }
-
-
-    get_styles () {
-
-        if( !this.styles ){
-            this.styles = {}
-        }
-
-        return this.styles
-    }
-
-
+    }    
+    
+    
     substyle( subclass , children_styles ) {
         if ( ! this.children_styles ) {
             this.children_styles = {}
-        }
+        }    
 
-
+        
         this.children_styles[ subclass ] = {}
         this.children_styles[ subclass ] = children_styles.styles;
         return this;
-    }
+    }    
 
-
+    
     child( nth_child , children_styles ) {
         this.substyle( `:nth-child(${nth_child})` , children_styles );
         return this;
-    }
+    }        
+
+
+    __apply_style( property , style , empty=undefined ) {
+    
+        if( !style ) {
+            style = empty;
+        }    
+    
+        if ( ! this.styles ) {
+            this.styles = {};
+        }    
+        this.styles[ property ] = style;
+    }    
 
 
 }
+
 
 
 
@@ -223,29 +270,31 @@ export class FlexObj extends Clanga {
     constructor() {
         super();
         this.mode = "";
+        this.is_wrap = true;
     }
 
 
-    use ( { gap, mode , wrap=false , reverse=false , reverse_wrap=false } ) {
+    use ( { gap, mode , wrap=true , reverse=false , reverse_wrap=false } ) {
 
         if ( ! this.styles ) {
             this.styles = {};
         }
 
-        this.apply_style( "display" , "flex" );
+        this.__apply_style( "display" , "flex" );
 
         if ( mode === "row" ) {
-            this.apply_style( "flex-direction" , reverse?"row-reverse":"row" );
+            this.__apply_style( "flex-direction" , reverse?"row-reverse":"row" );
         } else if ( mode === "col" ) {
-            this.apply_style( "flex-direction" , reverse?"column-reverse":"column" );
+            this.__apply_style( "flex-direction" , reverse?"column-reverse":"column" );
         } else {
             console.error( "mode in Flex can only be \"row\" or \"column\" " );
         }
 
-        this.mode = mode
+        this.mode = mode;
+        this.is_wrap = wrap;
 
-        this.apply_style( "gap" , gap );
-        this.apply_style( "flex-wrap" ,  wrap?( reverse_wrap?"wrap-reverse":"wrap" ):"nowrap" );
+        this.__apply_style( "gap" , gap );
+        this.__apply_style( "flex-wrap" ,  wrap?( reverse_wrap?"wrap-reverse":"wrap" ):"nowrap" );
 
         return this;
     }
@@ -273,26 +322,13 @@ export class FlexObj extends Clanga {
             console.error( "mode in Flex can only be \"row\" or \"column\" " );
         }
 
-        this.apply_style( "align-items" , this.wrap ? null : align_items );
-        this.apply_style( "align-content" , this.wrap ? align_items : null );
-        this.apply_style( "justify-content" , justify_content );
+        this.__apply_style( "align-items" , this.is_wrap ? null : align_items );
+        this.__apply_style( "align-content" , this.is_wrap ? align_items : null );
+        this.__apply_style( "justify-content" , justify_content );
         
         return this;
     }
-    /*
-        width: 100px;
 
-        height: 200px;
-
-        flex-grow: 0;
-
-        flex-basis: 100px;
-
-        align-self: center;
-
-        order: 0;
-
-    */
 
     itemClass( subclass , { grow , shrink , basis , align , order } ) {
 

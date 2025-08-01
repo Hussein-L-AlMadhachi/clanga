@@ -1,34 +1,41 @@
 {
-    "name": "clanga-compose",
-    "version": "0.0.6",
-    "description": "A libaray built to r",
-    "main": "cli.js",
+    "name": "clanga",
+    "version": "0.1.0",
+    "description": "Generate responsive and reusable CSS using clean JavaScript. No more raw CSS or utility class clutter.",
+    "main": "clanga.js",
     "type": "module",
     "scripts": {
-        "build":"node cli.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "node cli.js"
+    },
+    "engines": {
+        "node": ">=18"
     },
     "keywords": [
         "css",
-        "style",
-        "clanga",
-        "clanga-compose",
-        "compose",
+        "vue",
+        "cli",
+        "html",
         "vite",
         "react",
-        "vue",
-        "svelte",
+        "sheet",
+        "style",
         "solid",
+        "mobile",
         "alpine",
+        "clanga",
+        "svelte",
+        "tailwind",
+        "components",
+        "extensible",
         "javascript",
         "front-end",
         "frameworks",
-        "cli",
-        "mobile",
-        "html"
+        "responsive",
+        "css-generator",
+        "tailwind-alternative"
     ],
     "bin": {
-        "clanga-compose":"./cli.js"
+        "clanga":"./cli.js"
     },
     "author": "Hussein Al-Madhachi",
     "license": "MIT",

@@ -1,4 +1,4 @@
-import { Style , Flex , This , hsl } from "../clanga.js"
+import { Style , Flex , Div , hsl } from "../clanga.js"
 
 
 
@@ -14,38 +14,40 @@ const
 
 
 
-Style( "my-list-2" , {
+Style( ".my-list-2" , {
     all : Flex().use({ gap:"20px" , mode:"row" , wrap:true })
-        .visual({ h:"200px" , fg:text , bg:background })
-        .substyle( "my-item" , This().visual({ w:"100%" }) ),
+        .color({ fg:text , bg:background })
+        .shape({ h:"200px"})
+        .substyle( "my-item" , Div().shape({ w:"100%" }) ),
 
-    s :  This().visual({ w:"70%" }),
+    s :  Div().shape({ w:"70%" }).color({fg:accent}),
 })
 
 
 
 
-Style( "my-list-class" , {
+Style( ".my-list-class" , {
     all : Flex().use({ gap:"20px" , mode:"row" , wrap:true })
         .justify( { col: "space-evenly" ,  row:"center" } )
         .align({ wstretch:true , right:"20px" , left:"20px" })
-        .visual({ h:"200px" , fg:text , bg:background })
-        .itemClass( "my-child-flex-class" , {grow:1 , shrink:1 } ),
+        .color({ fg:text , bg:background })
+        .shape({ h:"200px" })
+        .itemClass( ".my-child-flex-class" , {grow:1 , shrink:1} ),
 
-    s :  This().visual({ w:"70%" }),
+    s :  Div().shape({ w:"70%" }),
 
-    l : This().visual({ w:"768px" }),
+    l : Div().shape({ w:"768px" }),
 })
 
 
 
-Style( "my-div" , {
-    all : This().align({ wstretch:true , right:"20px" , left:"20px" })
-        .visual({ h:"200px" , fg:text , bg:background }),
+Style( ".my-div" , {
+    all : Div().align({ wstretch:true , right:"20px" , left:"20px" })
+        .shape({h:"200px"}) .color({fg:text , bg:background}),
 
-    xs :  This().visual({ h:"70%" }),
+    xs :  Div().shape({ h:"70%" }),
 
-    xl : This().visual({ h:"768px" }),
+    xl : Div().shape({ h:"768px" }),
 })
 
 

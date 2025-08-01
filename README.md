@@ -1,8 +1,8 @@
-> Documentation are in Beta
+> Documentation is in Beta
 
-# Clang-Compose
+# Clanga
 
-Clang-Compose is a JavaScript-to-CSS generator — not a CSS-in-JS library.. it is designed to simplify the process of creating dynamic and reusable CSS styles directly from your JavaScript code.
+Clanga is a JavaScript-to-CSS generator — not a CSS-in-JS library.. it is designed to simplify the process of creating dynamic and reusable CSS styles directly from your JavaScript code.
 
 you no longer need to write CSS
 
@@ -11,6 +11,7 @@ Clanga also comes with its own styling rules (JS functions you call to generate 
 
 ## Features
 * No more raw CSS
+* reusable and extensible styling with Sheets — no more copy and paste
 * Prevents you from writing styles that contradict each other as much as possible
 * Generate responsive styles programmatically using JavaScript.
 * Improve reusability and maintainability of your styles.
@@ -18,7 +19,7 @@ Clanga also comes with its own styling rules (JS functions you call to generate 
 * Effortlessly customizable and extendable.
 
 ``` bash
-npm install clanga-compose
+npm install clanga
 ```
 
 ## TODO
@@ -32,7 +33,7 @@ in `vite.config.js` write this:
 ```javascript
 
 import { defineConfig } from 'vite'
-import clanga from 'clanga-compose/plugins/clanga-vite.js'
+import clanga from 'clanga/plugins/clanga-vite.js'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -45,7 +46,7 @@ export default defineConfig({
 ## 🧭 Quickstart
 
 ```js
-import { Style, Flex, This, hsl } from "clanga-compose";
+import { Style, Flex, This, hsl } from "clanga";
 
 // Define theme colors
 const primary = hsl(163, 54, 25);
@@ -63,10 +64,60 @@ Style(".my-div", {
 });
 ```
 
-then run
+then run (if not using vite plugin)
 ```bash
-npx clanga-compose
+npx clanga
 ```
+
+---
+
+## Sheets (extensible styling components)
+
+```js
+import { Sheet, Flex, Div } from "clanga";
+
+// will not be included in the CSS unless you call .apply on this
+const listStyle = Sheet({
+  xs: Flex()
+    .use({ gap: "2px", mode: "row" })
+    .align({ xcenter: true, ycenter: true })
+    .shape({ w: "100%", h: "50px" }),
+
+  xl: Flex()
+    .use({ gap: "2px", mode: "row" })
+    .align({ xcenter: true, ycenter: true })
+    .shape({ w: "300px", h: "50px" }),
+});
+
+// Clone and extend the base style
+const improved_list = listStyle.clone();
+
+// extend styles to add more of them
+improved_list.extend({
+  all: Div().color({ fg: "#1e1e1e" }).pad({ left: "20px", right: "20px" }),
+});
+
+// Apply styles to an actual selector 
+// in this case it creates a class in the compiled css file for this
+improved_list.apply(".MyButton");
+```
+---
+
+# Screen Sizes Selectors
+
+-  `all` : all screens, 
+-  `xxxxs` : 90px and wider screens
+-  `xxxs` : 156px and wider screens
+-  `xxs` : 270px and wider screens
+-  `xs` : 319px and wider screens
+-  `s` : 568px and wider screens
+-  `m` : 768px and wider screens
+-  `l` : 1024px and wider screens
+-  `xl` : 1280px and wider screens
+-  `xxl` : 1920px and wider screens
+-  `xxxl` : 2560px and wider screens
+-  `xxxxl` : 3840px and wider screens
+-  `xxxxxl` : 6016px and wider screens
 
 ---
 
@@ -84,9 +135,7 @@ Div().align({ ... }).visual({ ... }).extra({ ... });
 - `xcenter`, `ycenter`: booleans for centering
 - `wstretch`, `hstretch`: booleans for stretching
 
-#### `.visual({ ... })` options:
-- `fg`: color
-- `bg`: background color
+#### `.shape({ ... })` options:
 - `border`, `radius`: border styles
 - `w`, `h`: width and height (not allowed if `wstretch`/`hstretch` is used)
 - `pad` : padding
@@ -95,10 +144,23 @@ Div().align({ ... }).visual({ ... }).extra({ ... });
 - `pad_top`: top padding
 - `pad_bottom`: bottom padding
 
+#### `.pad({ ... })` options:
+
+
+#### `.color({ ... })` options:
+- `fg`: color
+- `bg`: background color
+
 #### `.extra({ styles })`
 Set arbitrary CSS styles using a dictionary.
 
 ---
+
+### `Sheet( initialStyles )` returns an object containing:
+- `.apply(selector)`: apply sheet to an actual CSS selector
+- `.modify(styles)`: modify styles in the sheet
+- `.clone()`: returns a clone of the original sheet with same styles to be extended further
+
 
 ### 🤸 `Flex()`
 
@@ -167,11 +229,12 @@ Style(".my-class_name", {
 
 ---
 
+
 ## 🧪 Example
 
 ```js
 
-import { hsl , Style , Flex , Div } from "clanga-compose";
+import { hsl , Style , Flex , Div } from "clanga";
 
 // themes (optional but very useful)
 const
