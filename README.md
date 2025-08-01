@@ -53,7 +53,7 @@ const background = hsl(163, 54, 95);
 const text = hsl(160, 52, 9);
 
 // Apply styles
-Style("my-div", {
+Style(".my-div", {
   all: Div()
     .align({ wstretch: true, left: "20px", right: "20px" })
     .visual({ h: "200px", fg: text, bg: background }),
@@ -143,7 +143,7 @@ rgb(r, g, b, a?)   // returns `rgba(...)`
 ## 🧩 Style()
 
 ```js
-Style("my-style-name", {
+Style(".my-class_name", {
   all: ...Clanga/Flex instance...,
   xs: ...,
   s: ...,
@@ -183,7 +183,7 @@ const
 ;
 
 
-Style("my-list", {
+Style(".my-list", {
   all: Flex().use({ mode: "row", wrap: true, gap: "20px" })
     .visual({ h: "200px", fg: text, bg: background })
     .itemClass("my-child", { grow: 1 }),

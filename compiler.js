@@ -35,13 +35,13 @@ process.on('beforeExit', (code) => {
 
         raw_style += `\n${ media_queries } {  /*${screen_size}*/  \n`;
         
-        for( const class_name in global_styles[screen_size] ) {
+        for( const css_selector in global_styles[screen_size] ) {
 
-            raw_style += `\n    .${class_name} {\n`;
+            raw_style += `\n    ${css_selector} {\n`;
 
-            for( const property in global_styles[screen_size][class_name] ) {
+            for( const property in global_styles[screen_size][css_selector] ) {
                 
-                let property_style = global_styles[screen_size][class_name][property];
+                let property_style = global_styles[screen_size][css_selector][property];
                 
                 if( property_style ) {
                     raw_style += `        ${property}: ${property_style};\n`;
@@ -80,7 +80,7 @@ export let media_queries_lookup = {
 
 
 export default function style( name , responsive_styles ) {
-    
+
     for( let screen_size in responsive_styles ) {
         
         if( ! global_styles.hasOwnProperty( screen_size ) ) {
@@ -101,3 +101,4 @@ export default function style( name , responsive_styles ) {
     }
 
 }
+
