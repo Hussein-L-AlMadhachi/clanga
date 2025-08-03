@@ -1,7 +1,5 @@
 # Clanga
 
-> Documentation is in Beta
-
 Clanga is a JavaScript-to-CSS generator — not a CSS-in-JS library.. it is designed to simplify the process of creating dynamic and reusable CSS styles directly from your JavaScript code.
 
 you no longer need to write CSS
