@@ -56,7 +56,7 @@ const text = hsl(160, 52, 9);
 Style(".my-div", {
   all: Div()
     .align({ wstretch: true, left: "20px", right: "20px" })
-    .visual({ h: "200px", fg: text, bg: background }),
+    .shape({ h: "200px" }) .color({ fg: text, bg: background }),
 
   xs: Div().visual({ h: "70%" }),
   xl: Div().visual({ h: "768px" }),
