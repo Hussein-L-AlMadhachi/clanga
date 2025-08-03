@@ -9,7 +9,7 @@ Clanga also comes with its own styling rules (JS functions you call to generate 
 ## Features
 
 * No more raw CSS
-* reusable and extensible styling with Sheets — no more copy and paste
+* reusable and extensible styling with Sheets — no more copying and pasting styles
 * Prevents you from writing styles that contradict each other as much as possible
 * Generate responsive styles programmatically using JavaScript.
 * Improve reusability and maintainability of your styles.
