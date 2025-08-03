@@ -22,6 +22,8 @@ Instead, it lets you define pure CSS styles using JavaScript — no runtime over
 * 🔹 Simplify the management of dynamic styles.
 * 🔹 Effortlessly customizable and extendable.
 
+## Installation
+
 ``` bash
 npm install clanga
 ```
@@ -44,6 +46,8 @@ export default defineConfig({
 ```
 
 ## 🧭 Quickstart
+
+write your `.style.js` file as such (let's call this`example.style.js`):
 
 ```js
 import { Style, Flex, This, hsl } from "clanga";
@@ -69,6 +73,8 @@ then run (if not using vite plugin)
 ```bash
 npx clanga
 ```
+
+when this code runs you will see compiled `.style.css` file to be used (in this case it will be `example.style.css`)
 
 ---
 
