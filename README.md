@@ -278,7 +278,7 @@ Style(".my-class_name", {
 
 ## 🧠 Tips
 
-* **Avoid conflicts**: `wstretch` can’t be used with `w`, etc.
+* **Avoid conflicts**: `wstretch` can’t be used with `w`, also `hstretch` can’t be used with `h`
 * Use `Div()` and `Flex()` to construct components.
 * You can call `.child(n, style)` or `.substyle(name, style)` for nested elements.
 * Responsive breakpoints are manual keys: `xs`, `s`, `m`, `l`, `xl`
