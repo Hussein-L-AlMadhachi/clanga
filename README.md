@@ -1,14 +1,20 @@
 # Clanga
 
-Clanga is a JavaScript-to-CSS generator — not a CSS-in-JS library.. it is designed to simplify the process of creating dynamic and reusable CSS styles directly from your JavaScript code.
+After years of dealing with the frustrations of traditional styling methods, I’m excited to announce the beta launch of Clanga: a JavaScript-to-CSS compiler that rethinks how we write styles.
 
-you no longer need to write CSS
+🛑 Forget everything you know about CSS-in-JS — Clanga is not a CSS-in-JS library.
 
-Clanga also comes with its own styling rules (JS functions you call to generate your optimised raw CSS) that provides a less painful experience compared to CSS or any technologies directly rely on it (e.g. Bootstrap and Tailwind)
+Instead, it lets you define pure CSS styles using JavaScript — no runtime overhead, no client-side hacks.
+
+## ✨ Why Clanga?
+  🔹 JavaScript dynamic power with raw CSS performance thanks to the compiler.
+  🔹 Define and reusable styles using Sheets, our extensible styling components that can be used as styling component libraries
+  🔹 Write dynamic, responsive styles using JavaScript.
+  🔹 Get consistent, predictable layout logic — less fiddling, more building.
+  🔹 Vite plugin support for hot reloading
 
 ## Features
 
-* No more raw CSS
 * reusable and extensible styling with Sheets — no more copying and pasting styles
 * Prevents you from writing styles that contradict each other as much as possible
 * Generate responsive styles programmatically using JavaScript.
