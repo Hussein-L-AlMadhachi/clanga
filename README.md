@@ -7,11 +7,11 @@ Forget everything you know about CSS-in-JS — Clanga is not a CSS-in-JS library
 Instead, it lets you define pure CSS styles using JavaScript — no runtime overhead, no client-side hacks.
 
 ## ✨ Why Clanga?
-  🔹 JavaScript dynamic power with raw CSS performance thanks to the compiler.
-  🔹 Define and reusable styles using Sheets, our extensible styling components that can be used as styling component libraries
-  🔹 Write dynamic, responsive styles using JavaScript.
-  🔹 Get consistent, predictable layout logic — less fiddling, more building.
-  🔹 Vite plugin support for hot reloading
+*  🔹 JavaScript dynamic power with raw CSS performance thanks to the compiler.
+*  🔹 Define and reusable styles using Sheets, our extensible styling components that can be used as styling component libraries
+*  🔹 Write dynamic, responsive styles using JavaScript.
+*  🔹 Get consistent, predictable layout logic — less fiddling, more building.
+*  🔹 Vite plugin support for hot reloading
 
 ## Features
 
