@@ -13,7 +13,7 @@ Instead, it lets you define pure CSS styles using JavaScript — no runtime over
 *  🔹 Get consistent, predictable layout logic — less fiddling, more building.
 *  🔹 Vite plugin support for hot reloading
 
-## Features
+## ✨ Features
 
 * 🔹 reusable and extensible styling with Sheets — no more copying and pasting styles
 * 🔹 Prevents you from writing styles that contradict each other as much as possible
@@ -22,13 +22,13 @@ Instead, it lets you define pure CSS styles using JavaScript — no runtime over
 * 🔹 Simplify the management of dynamic styles.
 * 🔹 Effortlessly customizable and extendable.
 
-## Installation
+## 🛠️ Installation
 
 ``` bash
 npm install clanga
 ```
 
-## Setup on Vite.js
+## 🎛️ Setup on Vite.js
 
 in `vite.config.js` write this:
 
@@ -78,7 +78,7 @@ when this code runs you will see compiled `.style.css` file to be used (in this 
 
 ---
 
-## Sheets (extensible styling components)
+## 📜 Sheets (extensible styling components)
 
 ```js
 import { Sheet, Flex, Div } from "clanga";
@@ -130,6 +130,8 @@ improved_list.apply(".MyButton");
 ---
 
 ## ✨ API Overview
+
+main functions are [Div](#-div) , [Flex](#-flex) and [Sheets](#sheet-initialstyles--returns-an-object-containing)
 
 ### 🧱 `Div()`
 
@@ -212,7 +214,7 @@ Set arbitrary CSS styles using a dictionary.
 
 ---
 
-### `Sheet( initialStyles )` returns an object containing:
+### 📜 `Sheet( initialStyles )` returns an object containing:
 * `.apply(selector)`: apply sheet to an actual CSS selector
 * `.modify(styles)`: modify styles in the sheet
 * `.clone()`: returns a clone of the original sheet with same styles to be extended further
