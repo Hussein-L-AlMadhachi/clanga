@@ -175,7 +175,7 @@ Div().font({
   break_word: true
 });
 
-
+```
 #### `.align({ ... })` options:
 * `top`, `bottom`, `left`, `right`: string (px, %, etc.)
 * `z`: z-index
