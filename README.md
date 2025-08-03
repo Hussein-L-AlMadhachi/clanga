@@ -26,11 +26,6 @@ Instead, it lets you define pure CSS styles using JavaScript — no runtime over
 npm install clanga
 ```
 
-## TODO
-
-* ~~vite plugin~~ (already available)
-* webpack plugin/loader
-
 ## Setup on Vite.js
 
 in `vite.config.js` write this:
