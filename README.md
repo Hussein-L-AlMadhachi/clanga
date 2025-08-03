@@ -15,12 +15,12 @@ Instead, it lets you define pure CSS styles using JavaScript — no runtime over
 
 ## Features
 
-* reusable and extensible styling with Sheets — no more copying and pasting styles
-* Prevents you from writing styles that contradict each other as much as possible
-* Generate responsive styles programmatically using JavaScript.
-* Improve reusability and maintainability of your styles.
-* Simplify the management of dynamic styles.
-* Effortlessly customizable and extendable.
+* 🔹 reusable and extensible styling with Sheets — no more copying and pasting styles
+* 🔹 Prevents you from writing styles that contradict each other as much as possible
+* 🔹 Generate responsive styles programmatically using JavaScript.
+* 🔹 Improve reusability and maintainability of your styles.
+* 🔹 Simplify the management of dynamic styles.
+* 🔹 Effortlessly customizable and extendable.
 
 ``` bash
 npm install clanga
