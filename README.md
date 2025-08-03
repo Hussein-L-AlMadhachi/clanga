@@ -1,4 +1,4 @@
-# Clanga
+# Clanga v0.1.2
 
 After years of dealing with the frustrations of traditional styling methods, I’m excited to announce the beta launch of Clanga: a JavaScript-to-CSS compiler that rethinks how we write styles.
 
