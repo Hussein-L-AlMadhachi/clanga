@@ -3,6 +3,7 @@
     "version": "0.1.1",
     "description": "Generate responsive and reusable CSS using clean JavaScript. No more raw CSS or utility class clutter.",
     "main": "clanga.js",
+    "types": "types.d.ts",
     "type": "module",
     "scripts": {
         "test": "node cli.js"

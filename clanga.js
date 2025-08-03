@@ -176,7 +176,7 @@ export class Clanga {
 
     font({
         family , line_height , weight , size , variant_caps , stretch , word_spacing ,
-        letter_spacing , variant , indent , word_break , hyphens , overflow , break_word ,
+        letter_spacing , variant , indent , word_break_mode , hyphens , overflow , break_word ,
         align , align_last , transform , decoration , decoration_color , decoration_style ,
         direction , writing_mode , white_space , 
     }) {
@@ -204,7 +204,7 @@ export class Clanga {
         this.__apply_style( "direction" , direction );
         this.__apply_style( "writing-mode" , writing_mode );
 
-        this.__apply_style( "word-break" , word_break );
+        this.__apply_style( "word-break" , word_break_mode );
         this.__apply_style( "white-space" , white_space );
         this.__apply_style("hyphens" , hyphens );
 
