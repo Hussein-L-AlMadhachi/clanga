@@ -7,11 +7,12 @@ Forget everything you know about CSS-in-JS — Clanga is not a CSS-in-JS library
 Instead, it lets you define pure CSS styles using JavaScript — no runtime overhead, no client-side hacks.
 
 ## ✨ Why Clanga?
-*  🔹 JavaScript dynamic power with raw CSS performance thanks to the compiler.
-*  🔹 Define and reusable styles using Sheets, our extensible styling components that can be used as styling component libraries
-*  🔹 Write dynamic, responsive styles using JavaScript.
-*  🔹 Get consistent, predictable layout logic — less fiddling, more building.
-*  🔹 Vite plugin support for hot reloading
+
+* 🔹 JavaScript dynamic power with raw CSS performance thanks to the compiler.
+* 🔹 Define and reusable styles using Sheets, our extensible styling components that can be used as styling component libraries
+* 🔹 Write dynamic, responsive styles using JavaScript.
+* 🔹 Get consistent, predictable layout logic — less fiddling, more building.
+* 🔹 Vite plugin support for hot reloading
 
 ## ✨ Features
 
@@ -185,40 +186,55 @@ Div().font({
 });
 
 ```
-#### `.align({ ... })` options:
+
+#### `.align({ ... })` options
+
 * `top`, `bottom`, `left`, `right`: string (px, %, etc.)
 * `z`: z-index
 * `fixed`, `relative`, `sticky`: booleans for position
 * `xcenter`, `ycenter`: booleans for centering
 * `wstretch`, `hstretch`: booleans for stretching
 
-#### `.shape({ ... })` options:
-* `border`: border styles
-*  `radius`: border radius styles
+#### `.shape({ ... })` options
+
+* `radius`: border radius styles
 * `w`, `h`: width and height (not allowed if `wstretch`/`hstretch` is used)
 
-#### `.pad({ ... })` options:
+#### `.border({ ... })` let's you select
+
+* `all`
+* `top`
+* `bottom`
+* `right`
+* `left`
+
+Each of these sides can have `{ color , width , style }`, each of these properties are strings for styles
+corresponding to `border-color`,`border-width` and `border-style`.
+
+#### `.pad({ ... })` options
+
 * `all` : padding for all sides
 * `right`: right padding
 * `left`: left padding
 * `top`: top padding
 * `bottom`: bottom padding
 
+#### `.color({ ... })` options
 
-#### `.color({ ... })` options:
 * `fg`: color
 * `bg`: background color
 
 #### `.extra({ styles })`
+
 Set arbitrary CSS styles using a dictionary.
 
 ---
 
-### 📜 `Sheet( initialStyles )` returns an object containing:
+### 📜 `Sheet( initialStyles )` returns an object containing
+
 * `.apply(selector)`: apply sheet to an actual CSS selector
 * `.modify(styles)`: modify styles in the sheet
 * `.clone()`: returns a clone of the original sheet with same styles to be extended further
-
 
 ### 🤸 `Flex()`
 
