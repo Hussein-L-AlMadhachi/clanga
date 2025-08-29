@@ -73,7 +73,7 @@ process.on('beforeExit', (code) => {
 
 
 export let media_queries_lookup = {
-    all : "@media screen and (min-width: 1px)", 
+    all : "", // do not remove. this is used for verification even though no media query is used
     xxxxs : "@media screen and (min-width: 90px)", // smart watches
     xxxs : "@media screen and (min-width: 156px)",
     xxs : "@media screen and (min-width: 270px)", // almost the smallest smartphone

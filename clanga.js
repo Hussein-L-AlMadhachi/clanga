@@ -144,21 +144,20 @@ export class Clanga {
     }
 
 
-    shape( { border , radius , w , h } ) {
+    shape( { radius , w , h } ) {
         
         if ( ! this.styles ) {
             this.styles = {};
         }
         
-        this.__apply_style( "border" , border );
         this.__apply_style( "border-radius" , radius );
-
+        
         // because .align sets "width" and "height" you gotta prevent this from overwriting it 
         if ( w ) {
             if (this.is_x_stretched ) {
                 throw new Error( "you cannot use \"wstretch\" and \"w\" together" )
             }
-
+            
             this.__apply_style( "width" , w );
         }    
         
@@ -171,8 +170,27 @@ export class Clanga {
         }    
         
         return this;
-    }    
-    
+    }
+
+
+    /**
+     *  all parameters are {color,style,width}
+     * 
+     *  "all" sets all "top","bottom","right" and "left"
+     *    then each of these a can be used to overwrite the styles 
+     *    set by "all"
+     */
+    border( { top , bottom , right , left , all } ){
+
+        this.__apply_border_style( "" , all );
+        this.__apply_border_style( "top" , top );
+        this.__apply_border_style( "bottom" , bottom );
+        this.__apply_border_style( "right" , right );
+        this.__apply_border_style( "left" , left );
+
+        return this;
+    }
+
 
     font({
         family , line_height , weight , size , variant_caps , stretch , word_spacing ,
@@ -231,7 +249,7 @@ export class Clanga {
         if ( ! this.children_styles ) {
             this.children_styles = {}
         }    
-
+        
         
         this.children_styles[ subclass ] = {}
         this.children_styles[ subclass ] = children_styles.styles;
@@ -243,6 +261,21 @@ export class Clanga {
         this.substyle( `:nth-child(${nth_child})` , children_styles );
         return this;
     }        
+
+
+    /**
+     *   "css_side_selector" is "" for selecting all border sides
+     *     "right" for right border side, "left" for left border 
+     *     side "top" for upper border side and finally "bottom" for
+     *     the lower border side
+     */
+    __apply_border_style( css_side_selector , {color,style,width} ){
+        const side_selector = "border"+css_side_selector?`-{css_side_selector}`:"";
+    
+        this.__apply_style( `${side_selector}-color` , color );
+        this.__apply_style( `${side_selector}-style` , style );
+        this.__apply_style( `${side_selector}-width` , width );
+    }
 
 
     __apply_style( property , style , empty=undefined ) {

@@ -39,8 +39,21 @@ export interface ColorOptions {
 export interface ShapeOptions {
     h?: string;
     w?: string;
-    border?: string;
     radius?: string;
+}
+
+export interface BorderSideOptions {
+    color?: string;
+    width?: string;
+    style?: string;
+}
+
+export interface BorderOptions {
+    all?: BorderSideOptions;
+    top?: BorderSideOptions;
+    bottom?: BorderSideOptions;
+    right?: BorderSideOptions;
+    left?: BorderSideOptions;
 }
 
 export interface FontOptions {
@@ -79,6 +92,7 @@ export class Clanga {
     pad( pad_options:PadOptions ) : this;
     color( color_options:ColorOptions ) : this;
     shape( shape_options:ShapeOptions ) :this;
+    border( border_options:BorderOptions ) : this;
     font( font_options:FontOptions ) : this;
     extra( extra_styles:CustomeStyle ) : this;
     substyle( subclass:string , children_styles:ClangaStyle ): this;
